@@ -3,15 +3,19 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import VueLazyLoad from 'vue-lazyload'
 import 'assets/stylus/index.styl'
 import 'assets/stylus/iconfont.css'
 
+Vue.use(VueLazyLoad, {
+    loading: require('assets/images/loading.gif')
+})
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
 new Vue({
-  el: '#app',
-  router,
-  components: { App },
-  template: '<App/>'
+    el: '#app',
+    router,
+    components: { App },
+    template: '<App/>'
 })

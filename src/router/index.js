@@ -9,23 +9,22 @@ const User = resolve => require(['pages/user/User'], resolve);
 Vue.use(Router)
 
 export default new Router({
-  routes: [
-  	{
-  		path: '/',
-  		redirect: 'Home'
-  	},
-  	{
-  		path: '/home',
-  		component: Home
-  	},
-  	{
-  		path: '/rank',
-  		component: Rank
-  	},
-  	{
-  		path: '/user',
-  		component: User
-  	}
-  ],
-  mode: 'history'
+    routes: [{
+            path: '/',
+            redirect: 'home'
+        },
+        {
+            path: '/home',
+            component: Home
+        },
+        {
+            path: '/rank',
+            component: Rank
+        },
+        {
+            path: '/user',
+            component: User
+        }
+    ],
+    mode: 'history'
 })
