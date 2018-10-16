@@ -52,50 +52,50 @@
 		},
 		methods: {
 			_initScroll() {
-			if (!this.$refs.wrapper) {
-				return;
-			}
-			this.scroll = new BScroll(this.$refs.wrapper, {
-				probeType: this.probeType,
-				click: this.click,
-				scrollX: this.scrollX,
-				eventPassthrough: this.eventPassthrough
-			});
-			// 是否需要监听滚动事件
-			if (this.listenScroll) {
-				this.scroll.on('scroll', (pos) => {
-				this.$emit('scroll', pos);
-				});
-			}
-			// 如果支持上拉刷新
-			if (this.pullup) {
-				this.scroll.on('scrollEnd', () => {
-				if (this.scroll.y <= this.scroll.maxScrollY + 50) { // 快滚动到底部
-					this.$emit('scrollToEnd'); // 派发事件说明已经滚动到底部
+				if (!this.$refs.wrapper) {
+					return;
 				}
+				this.scroll = new BScroll(this.$refs.wrapper, {
+					probeType: this.probeType,
+					click: this.click,
+					scrollX: this.scrollX,
+					eventPassthrough: this.eventPassthrough
 				});
-			}
-			// 在触发滚动之前派发事件，这里主要用于用户体验优化
-			if (this.beforeScroll) {
-				this.scroll.on('beforeScrollStart', () => {
-				this.$emit('beforeScroll');
-				});
-			}
+				// 是否需要监听滚动事件
+				if (this.listenScroll) {
+					this.scroll.on('scroll', (pos) => {
+					this.$emit('scroll', pos);
+					});
+				}
+				// 如果支持上拉刷新
+				if (this.pullup) {
+					this.scroll.on('scrollEnd', () => {
+					if (this.scroll.y <= this.scroll.maxScrollY + 50) { // 快滚动到底部
+						this.$emit('scrollToEnd'); // 派发事件说明已经滚动到底部
+					}
+					});
+				}
+				// 在触发滚动之前派发事件，这里主要用于用户体验优化
+				if (this.beforeScroll) {
+					this.scroll.on('beforeScrollStart', () => {
+					this.$emit('beforeScroll');
+					});
+				}
 			},
 			enable() {
-			this.scroll && this.scroll.enable();
+				this.scroll && this.scroll.enable();
 			},
 			disable() {
-			this.scroll && this.scroll.disable();
+				this.scroll && this.scroll.disable();
 			},
 			refresh() {
-			this.scroll && this.scroll.refresh();
+				this.scroll && this.scroll.refresh();
 			},
 			scrollTo() {
-			this.scroll && this.scroll.scrollTo.apply(this.scroll, arguments);
+				this.scroll && this.scroll.scrollTo.apply(this.scroll, arguments);
 			},
 			scrollToElement() {
-			this.scroll && this.scroll.scrollToElement.apply(this.scroll, arguments);
+				this.scroll && this.scroll.scrollToElement.apply(this.scroll, arguments);
 			}
 
 		},

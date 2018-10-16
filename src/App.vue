@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <router-view/>
+    <keep-alive>
+      <router-view/>
+    </keep-alive> 
     <tab></tab>
   </div>
 </template>
@@ -9,6 +11,7 @@
 import Tab from '@/pages/tab/Tab'	
 export default {
   name: 'App',
+
   components: {
   	Tab
   }

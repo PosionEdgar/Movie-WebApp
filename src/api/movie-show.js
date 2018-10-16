@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { commonParams } from './config';
+import { commonParams } from './Config';
 
 export function getMovies(start, count) {
     const url = '/v2/movie/in_theaters';
