@@ -6,6 +6,7 @@
         :key="index"
         class="rank-item"
         :class="{'compact': !needRank}"
+        @click.stop="selectItem(item, $event)"
       >
         <div class="rank-rating">
           <div class="line"></div>
@@ -65,6 +66,12 @@
        if (srcUrl !== undefined) { // 图片防盗链处理
           return ('https://images.weserv.nl/?url=' + srcUrl.replace(/http\w{0,1}:\/\//, ''));
        }
+      },
+      selectItem (movie) {
+        if (!event._constructed) { //忽略浏览器派发的点击事件，只留scroll组件派发的
+          return
+        }
+        this.$emit('select', movie)
       }
     },
     components: {

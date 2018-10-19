@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <keep-alive>
+    <keep-alive exclude="MovieDetail">
       <router-view @hasLoad="hasLoad"></router-view>
     </keep-alive> 
     <tab></tab>

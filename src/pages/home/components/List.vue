@@ -5,6 +5,7 @@
 	  	v-for="(movie,index) of Movies"
 		ref="group"
 		:key="index"
+		@click="selectItem(movie)"
 	>
         <div class="date" v-if="needDate && !dateEqual(index)">{{movie.date}}</div>
         <div class="item">
@@ -54,7 +55,9 @@
 		},
 		computed: {},
 		methods: {
-		
+			selectItem (movie) {
+				this.$emit('select',movie)
+			},
 			dateEqual(index) { // 确定相邻两部电影日期是否一样，划分日期分组
 				if (index === 0) {
 				return false;
@@ -96,7 +99,7 @@
 			},
 			replaceUrl(srcUrl) {
 				if (srcUrl !== undefined) { // 图片防盗链处理
-				return ('https://images.weserv.nl/?url=' + srcUrl.replace(/http\w{0,1}:\/\//, ''));
+					return ('https://images.weserv.nl/?url=' + srcUrl.replace(/http\w{0,1}:\/\//, ''));
 				}
 			}
 		},

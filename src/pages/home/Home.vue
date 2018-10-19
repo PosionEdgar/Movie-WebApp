@@ -16,8 +16,9 @@
       >
         <div class="list-inner">
           <movie-list 
-		  		:Movies="hotMovies" 
-				:hasMore="hasMoreHotMovies" 
+		  		  :Movies="hotMovies" 
+				    :hasMore="hasMoreHotMovies"
+            @select="selectMovie" 
 		  ></movie-list>
         </div>
       </scroll>
@@ -33,13 +34,14 @@
       >
         <div class="list-inner">
           <movie-list 
-		      :Movies="comingMovies" 
-			  :needDate="needDate"
-			  @getHeight="getHeight" 
-			  @getMap="getMap" 
-			  :hasMore="hasMoreComingMovies" 
-			  ref="list"
-		  ></movie-list>
+              @select="selectMovie" 
+              :Movies="comingMovies" 
+              :needDate="needDate"
+              @getHeight="getHeight" 
+              @getMap="getMap" 
+              :hasMore="hasMoreComingMovies" 
+              ref="list"
+          ></movie-list>
         </div>
       </scroll>
       <loadmore :fullScreen="fullScreen"
@@ -65,7 +67,8 @@
 	import Scroll from 'common/scroll/Scroll'
 	import Loadmore from 'common/loadmore/Loadmore'
 	import {createMovieList} from 'assets/js/movielist.js'
-	import { getMovies, getComingMovies} from 'api/movie-show.js'
+  import { getMovies, getComingMovies} from 'api/movie-show.js'
+  import { mapMutations } from 'vuex'
 	const SEARCH_MORE = 10; //每次请求的长度
 	const TITLE_HEIGHT = 30; //日期栏高度
 	export default {
@@ -109,6 +112,12 @@
       }
     },
     methods: {
+      selectMovie (movie) { //转入电影详情
+          this.setMovie(movie);
+          this.$router.push({
+            path: `movie/${movie.id}`
+          })
+      },
       switchItem(index) { // 切换tab栏
         this.currentIndex = index;
         if (index === 1) { // 重新计算各个区间高度
@@ -188,7 +197,10 @@
           }
           this.loadingFlag = true;
         }
-      }
+      },
+      ...mapMutations({
+        setMovie: 'SET_MOVIE'
+      })
     },
     watch: {
       scrollY(newY, oldY) {

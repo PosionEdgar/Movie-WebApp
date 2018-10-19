@@ -30,7 +30,9 @@
       <div class="rank-content" :class="{'more-padding':rankType==='豆瓣 Top250'}">
         <rank-list :rankItems="rankList[index]"
                    :page="index"
-                   :hasMore="hasMore[index]"></rank-list>
+                   :hasMore="hasMore[index]"
+                   @select="selectMovie"
+        ></rank-list>
       </div>
       <loadmore :fullScreen="fullScreen" v-if="!rankList[index].length"></loadmore>
     </scroll>
@@ -44,6 +46,7 @@ import Loadmore from 'common/loadmore/Loadmore'
 import Scroll from 'common/scroll/Scroll' 
 import {top250Rank, usBoxRank, weeklyRank, newMoviesRank} from 'api/movie-rank'
 import { createRankList } from 'assets/js/movielist'
+import { mapMutations } from 'vuex'
 const SEARCH_MORE = 10;
 export default {
     name: 'RankDetail',
@@ -90,7 +93,12 @@ export default {
         scroll (pos) {
             this.scrollY[this.currentIndex] = pos.y
         },
-
+        selectMovie (movie) {
+            this.setMovie(movie);
+            this.$router.push({
+                path: `/movie/${movie.id}`
+            })
+        },
         _selectType () {
             const type = this.$route.params.rankType;
             switch (type) {
@@ -162,7 +170,10 @@ export default {
             if(!movies.length || data.start + data.count >= end) {
                 this.hasMore[this.currentIndex] = false;
             }
-        }
+        },
+        ...mapMutations({
+            setMovie: 'SET_MOVIE'
+        })
     },
     components: {
         Switches,
