@@ -9,7 +9,11 @@
                     <i class="iconfont icon-dianying"></i>
                     电影
                 </span>
-                <span class="movie-name" v-if="changeFix" v-text="movieDetail.title"></span>
+                <span 
+                    class="movie-name" 
+                    v-if="changeFix" 
+                    v-text="movieDetail.title"
+                ></span>
             </span>
         </div>
         <scroll 
@@ -26,7 +30,8 @@
                         <img v-lazy="replaceUrl(movieDetail.images.large)">
                     </div>
                     <movie-info
-                        :movieDetail="movieDetail"    
+                        :movieDetail="movieDetail"
+                        @selectCelebrity="selectCelebrity"
                     ></movie-info>
                     <div class="switch">
                         <switches  
@@ -124,9 +129,15 @@
             },
             selectReview (id) {
                 this.setReviewId(id)
-                console.log(id)
                 this.$router.push({
                     path: `/movie/${this.movieDetail.id}/review/${id}`
+                })
+            },
+            selectCelebrity (id) {
+                this.setCelebrity(id)
+                
+                this.$router.push({
+                    path: `/celebrity/${id}`
                 })
             },
             replaceUrl (srcUrl) {
@@ -165,7 +176,8 @@
             },
             ...mapMutations({
                 setReviewId: 'SET_REVIEW_ID',
-                setDiscussion: 'SET_DISCUSSION_TYPE'
+                setDiscussion: 'SET_DISCUSSION_TYPE',
+                setCelebrity: 'SET_CELEBRITY_ID'
             })
         },
         components: {

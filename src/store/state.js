@@ -5,7 +5,8 @@ const state = {
     watchedMovies: loadWatchedMovie(), //想看的电影
     currentDiscussionType: '', //路由类型
     favoriteComments: loadComment(), //点赞的评论
-    currentReviewId: 0 //影评详情
+    currentReviewId: 0, //影评详情
+    currentCelebrityId: 0 //影人详情
 }
 
 

@@ -51,6 +51,7 @@
                     class="cast-item"
                     v-for="(item, index) of allCasts"
                     :key="index"
+                    @click="selectCelebrity(item.id, $event)"
                 >
                     <img v-lazy="replaceUrl(item.avatars.large)" width="90" height="120">
                     <h3 class="item-title">{{item.name}}</h3>
@@ -160,6 +161,12 @@
                 let width = (picWidth + margin) * this.allCasts.length - margin;
                 this.$refs.content.style.width = width + 'px';
             },
+           selectCelebrity (id) {
+               if (!event._constructed) {
+                   return;
+               }
+               this.$emit('selectCelebrity', id)
+           },
             normalizeScore () { //数位补零
                 let len = this.movieDetail.rating.average.toString().length;
                 if (len < 2) {

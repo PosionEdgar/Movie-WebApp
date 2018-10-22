@@ -9,6 +9,8 @@ const RankDetail = resolve => require(['pages/rank-detail/rank-detail'], resolve
 const MovieDetail = resolve => require(['pages/movie-detail/movie-detail'], resolve)
 const AllDiscussion = resolve => require(['pages/all-discussion/all-discussion'], resolve);
 const ReviewDetail = resolve => require(['pages/review-detail/review-detail'], resolve);
+const CelebrityDetail = resolve => require(['pages/celebrity-detail/celebrity-detail'], resolve);
+const CelebrityWorks = resolve => require(['pages/celebrity-works/celebrity-works'], resolve);
 
 Vue.use(Router)
 
@@ -42,6 +44,14 @@ export default new Router({
             }, {
                 path: 'review/:reviewId',
                 component: ReviewDetail
+            }]
+        },
+        {
+            path: '/celebrity/:celebrityId',
+            component: CelebrityDetail,
+            children: [{
+                path: 'works',
+                component: CelebrityWorks
             }]
         }
     ],

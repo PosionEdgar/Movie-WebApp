@@ -8,7 +8,7 @@
         :class="{'compact': !needRank}"
         @click.stop="selectItem(item, $event)"
       >
-        <div class="rank-rating">
+        <div class="rank-rating" v-show="needRank">
           <div class="line"></div>
           <span class="text">{{ page * 50 + (index + 1)}}</span>
         </div>
@@ -45,7 +45,7 @@
       },
       hasMore: {
         type: Boolean,
-        default: true
+        default: false
       },
       needLoading: {
         type: Boolean,

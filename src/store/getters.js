@@ -9,3 +9,5 @@ export const currentDiscussionType = state => state.currentDiscussionType;
 export const favoriteComments = state => state.favoriteComments;
 
 export const currentReviewId = state => state.currentReviewId;
+
+export const currentCelebrityId = state => state.currentCelebrityId;

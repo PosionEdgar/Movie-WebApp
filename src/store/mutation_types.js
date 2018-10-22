@@ -9,3 +9,5 @@ export const SET_DISCUSSION_TYPE = 'SET_DISCUSSION_TYPE'; //设置当前评论�
 export const SET_FAVORITE_COMMENTS = 'SET_FAVOVITE_COMMENTS';
 
 export const SET_REVIEW_ID = 'SET_REVIEW_ID';
+
+export const SET_CELEBRITY_ID = 'SET_CELEBRITY_ID';

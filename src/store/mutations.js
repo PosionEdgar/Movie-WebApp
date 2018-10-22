@@ -18,6 +18,9 @@ const mutations = {
     },
     [types.SET_REVIEW_ID](state, id) {
         state.currentReviewId = id;
+    },
+    [types.SET_CELEBRITY_ID](state, id) {
+        state.currentCelebrityId = id;
     }
 }
 
