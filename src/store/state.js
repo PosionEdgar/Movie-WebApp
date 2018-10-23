@@ -1,4 +1,4 @@
-import { loadWantedMovie, loadWatchedMovie, loadComment } from 'assets/js/cache'
+import { loadWantedMovie, loadWatchedMovie, loadComment, loadCelebrity } from 'assets/js/cache'
 const state = {
     movie: {}, //电影的信息
     wantedMovies: loadWantedMovie(), // 看过的电影
@@ -6,7 +6,8 @@ const state = {
     currentDiscussionType: '', //路由类型
     favoriteComments: loadComment(), //点赞的评论
     currentReviewId: 0, //影评详情
-    currentCelebrityId: 0 //影人详情
+    currentCelebrityId: 0, //影人详情
+    collectedCelebrities: loadCelebrity() //收藏的影人
 }
 
 

@@ -3,9 +3,11 @@ const USER_ID = 'buptsky';
 const COMMENY_KEY = '__comment__'; //点赞的评论
 const WANTED_KEY = '__wanted__'; //想看的电影
 const WATCHED_KEY = '__watched__'; //已经看过的电影
+const CELEBRITY_KEY = '__celebrity__'; //收藏影人
 const WANTED_MAX_LENGTH = 300;
 const WATCHED_MAX_LENGTH = 300;
 const COMMENT_MAX_LENGTH = 300;
+const CELEBRITY_MAX_LENGTH = 300;
 
 
 /*
@@ -92,4 +94,32 @@ export function saveComment(id) {
 }
 export function loadComment() {
     return loadFromLocal(USER_ID, COMMENY_KEY, [])
+}
+
+
+/*
+    影人
+*/
+export function saveCelebrity(celebrity) {
+    const maxLen = CELEBRITY_MAX_LENGTH;
+    let celebrities = loadFromLocal(USER_ID, CELEBRITY_KEY, []); //获取不到返回空数组
+    //查找缓存数据中是否包含添加的数据、返回索引
+    const index = celebrities.findIndex((item) => {
+        return item.id === celebrity.id
+    });
+    if (index === -1) {
+        celebrities.push(celebrity);
+        //超过长度移除起始数据
+        if (maxLen && celebrities.length > maxLen) {
+            celebrities.shift()
+        }
+    } else { //若已经存在了被标记的id，则代表用户进行了反操作，取消了喜欢
+        celebrities.splice(index, 1)
+    }
+    saveToLocal(USER_ID, CELEBRITY_KEY, celebrities); //存入缓存
+    return celebrities;
+}
+
+export function loadCelebrity() {
+    return loadFromLocal(USER_ID, CELEBRITY_KEY, [])
 }

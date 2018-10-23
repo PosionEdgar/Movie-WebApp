@@ -11,3 +11,5 @@ export const favoriteComments = state => state.favoriteComments;
 export const currentReviewId = state => state.currentReviewId;
 
 export const currentCelebrityId = state => state.currentCelebrityId;
+
+export const collectedCelebrities = state => state.collectedCelebrities;

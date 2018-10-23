@@ -17,7 +17,10 @@
           <div class="main">
             <h1 class="name-cn">{{celebrityDetail.name}}</h1>
             <span class="name-en">{{celebrityDetail.name_en}}</span>
-            <div class="collect" >
+            <div class="collect" 
+                @click="saveCollect" 
+                :class="{'has-collect': isCollected}"
+            >
               <i class="iconfont icon-shoucang"></i>
               <span class="text">{{collectText}}</span>
             </div>
@@ -71,7 +74,7 @@
     import { createMovieList } from 'assets/js/movielist';
     import Celebrity from 'assets/js/celebrity';
     import { getCelebrity } from 'api/celebrity'
-    import { mapGetters, mapMutations } from 'vuex'  
+    import { mapGetters, mapMutations, mapActions } from 'vuex'  
     export default {
         name: 'celebrity',
         data() {
@@ -82,12 +85,14 @@
                 scrollX: true,
                 fullScreen: true,
                 eventPassthrough: 'vertical',
-                collectText: '收藏'
+                collectText: '收藏',
+                isCollected: false
             }
         },
         computed: {
             ...mapGetters([
-                'currentCelebrityId'
+                'currentCelebrityId',
+                'collectedCelebrities'
             ])
         },
         created() {
@@ -97,11 +102,21 @@
             back () {
                 this.$router.back()
             },
+            saveCollect() {
+                this.markCelebrity(this.celebrity)
+                this.isCollected = !this.isCollected;
+                if (!this.isCollected) {
+                    this.collectText = "收藏"
+                } else {
+                    this.collectText = "已收藏"
+                }
+            },
             _getCelebrity() {
             if (!this.currentCelebrityId) { // 当前页面浏览器刷新跳转回主页
                 this.$router.push('/home');
                 return;
             }
+            
             getCelebrity(this.currentCelebrityId).then((res) => {
                 if (!this.$route.params.celebrityId) { // 防止快速切换报错
                     return;
@@ -113,6 +128,7 @@
                     ret.push(item.subject);
                 });
                 this.works = createMovieList(ret);
+                this._checkCollect();
                 // 把影人包装成影人类，便于收藏和读取收藏
                 const mainWorks = [];
                  res.works.forEach((item) => {
@@ -157,9 +173,26 @@
                     path: `/celebrity/${this.currentCelebrityId}/works`
                 })
             },
+            _checkCollect() {
+                const index = this.collectedCelebrities.findIndex((item) => {
+                    return item.id === this.celebrityDetail.id
+                });
+                    console.log(index)
+
+                if (index > -1) {
+                    this.isCollected = true;
+                    this.collectText = "已收藏"
+                } else {
+                    this.isCollected = false;
+                    this.collectText = "收藏"
+                }
+            },
             ...mapMutations({
                 setMovie: 'SET_MOVIE'
-            })
+            }),
+            ...mapActions([
+                'markCelebrity'
+            ])
         },
         components: {
             Star,
@@ -244,7 +277,7 @@
                             &.has-collect
                                 border 1px solid $color-collect
                                 color $color-collect
-                                .icon
+                                .icon-shoucang
                                     color $color-collect
                                 .text
                                     color $color-collect
