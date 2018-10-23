@@ -1,5 +1,5 @@
 <template>
-	<div class="go-search">
+	<div class="go-search" @click="goSearch">
 		<div class="logo">
 			<img src="@/assets/images/douban-logo.png" width="35" height="35" />
 		</div>
@@ -12,7 +12,12 @@
 
 <script>
 	export default {
-		name: 'HomeHeader'
+		name: 'HomeHeader',
+		methods: {
+			goSearch() {
+				this.$router.push('/search')
+			}
+		}
 	}
 </script>
 

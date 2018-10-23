@@ -11,6 +11,7 @@ const AllDiscussion = resolve => require(['pages/all-discussion/all-discussion']
 const ReviewDetail = resolve => require(['pages/review-detail/review-detail'], resolve);
 const CelebrityDetail = resolve => require(['pages/celebrity-detail/celebrity-detail'], resolve);
 const CelebrityWorks = resolve => require(['pages/celebrity-works/celebrity-works'], resolve);
+const Search = resolve => require(['pages/search/search'], resolve);
 
 Vue.use(Router)
 
@@ -34,6 +35,10 @@ export default new Router({
         {
             path: '/user',
             component: User
+        },
+        {
+            path: '/search',
+            component: Search
         },
         {
             path: '/movie/:movieId',
