@@ -21,7 +21,7 @@
             },
             tagSearch: {
                 type: Boolean,
-                default: true
+                default: false
             }
         },
         data () {
@@ -88,6 +88,7 @@
             background $color-background
             color $color-text-f
             font-size $font-size-medium
+            caret-color $color-theme-f
             &::placeholder
                 color $color-text
         .cancel

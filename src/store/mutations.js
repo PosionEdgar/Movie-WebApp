@@ -24,6 +24,9 @@ const mutations = {
     },
     [types.SET_COLLECT_CELEBRITY](state, celebrity) {
         state.collectedCelebrities = celebrity;
+    },
+    [types.SET_SEARCH_HISTORY](state, history) {
+        state.searchHistory = history;
     }
 }
 

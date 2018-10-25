@@ -13,3 +13,5 @@ export const currentReviewId = state => state.currentReviewId;
 export const currentCelebrityId = state => state.currentCelebrityId;
 
 export const collectedCelebrities = state => state.collectedCelebrities;
+
+export const searchHistory = state => state.searchHistory;

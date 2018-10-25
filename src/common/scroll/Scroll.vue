@@ -78,7 +78,7 @@
 				// 在触发滚动之前派发事件，这里主要用于用户体验优化
 				if (this.beforeScroll) {
 					this.scroll.on('beforeScrollStart', () => {
-					this.$emit('beforeScroll');
+						this.$emit('beforeScroll');
 					});
 				}
 			},
